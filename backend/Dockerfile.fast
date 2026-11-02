@@ -1,0 +1,49 @@
+# Faster Dockerfile - downloads SAM2 weights instead of pip install
+# Build: docker build -f backend/Dockerfile.fast -t circuitvision-runpod .
+
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV MPLBACKEND=Agg
+
+# Install system deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ngspice libngspice0 libngspice0-dev \
+    libgl1-mesa-glx libglib2.0-0 \
+    git wget curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python deps (without SAM2 from git)
+RUN pip install --no-cache-dir \
+    "numpy<2" opencv-python-headless Pillow \
+    ultralytics google-genai python-dotenv \
+    scikit-learn peft requests gdown \
+    PySpice matplotlib PyYAML runpod \
+    streamlit openai
+
+# Clone SAM2 repo (faster than pip install)
+RUN git clone --depth 1 https://github.com/facebookresearch/sam2.git /app/sam2 && \
+    cd /app/sam2 && pip install -e . --no-deps
+
+# Copy project files
+COPY netlist_simulator/src /app/netlist_simulator/src
+COPY netlist_simulator/setup.py /app/netlist_simulator/
+COPY netlist_simulator/README.md /app/netlist_simulator/
+RUN pip install -e /app/netlist_simulator
+
+COPY CircuitVision/src /app/CircuitVision/src
+COPY CircuitVision/classes.json /app/CircuitVision/
+COPY CircuitVision/download_models.py /app/CircuitVision/
+
+COPY backend/src/ /app/src/
+COPY backend/handler.py /app/
+COPY backend/test_local.py /app/
+
+WORKDIR /app/CircuitVision
+RUN python download_models.py
+
+WORKDIR /app
+CMD ["python", "-u", "handler.py"]

@@ -1,0 +1,35 @@
+# Lightweight Dockerfile for testing simulation only (no CircuitVision)
+# Build: docker build -f backend/Dockerfile.slim -t circuitvision-slim .
+
+FROM python:3.10-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV MPLBACKEND=Agg
+
+# Install ngspice only
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ngspice \
+    libngspice0 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Minimal requirements for simulation
+RUN pip install --no-cache-dir \
+    PySpice>=1.5 \
+    matplotlib>=3.5.0 \
+    numpy>=1.20.0 \
+    PyYAML>=6.0
+
+# Copy netlist_simulator
+COPY netlist_simulator/src /app/netlist_simulator/src
+COPY netlist_simulator/setup.py /app/netlist_simulator/
+RUN pip install -e /app/netlist_simulator
+
+# Copy backend (normalizer only, no CircuitVision pipeline)
+COPY backend/src/netlist_normalizer.py /app/src/
+COPY backend/src/__init__.py /app/src/
+COPY backend/test_local.py /app/
+
+CMD ["python", "test_local.py", "--sim-only"]

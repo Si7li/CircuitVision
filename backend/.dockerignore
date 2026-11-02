@@ -1,0 +1,61 @@
+# Docker ignore file for CircuitVision RunPod build
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Python cache
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.env
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test outputs
+test_output/
+*.log
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Large model files (should be downloaded or mounted)
+# Uncomment these if models are pre-downloaded locally
+# CircuitVision/models/
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.egg
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Flutter app (not needed for backend)
+flutter_app/
