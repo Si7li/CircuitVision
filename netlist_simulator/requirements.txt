@@ -1,0 +1,11 @@
+# Core dependencies
+PySpice>=1.5
+matplotlib>=3.5.0
+numpy>=1.20.0
+
+# Optional: for YAML config files
+PyYAML>=6.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0

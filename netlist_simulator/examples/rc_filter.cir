@@ -1,0 +1,18 @@
+RC Low-Pass Filter
+* Simple RC filter with sinusoidal input
+* Demonstrates basic transient analysis
+
+* Input voltage source: 5V peak, 1kHz sine wave
+VIN in 0 DC 0 SIN(0 5 1k)
+
+* Filter components
+R1 in out 1k
+C1 out 0 1u
+
+* Load resistor
+RL out 0 10k
+
+* Simulation command
+.tran 0.01m 10m
+
+.end

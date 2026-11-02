@@ -1,0 +1,46 @@
+CMOS XOR Gate
+* 2-input CMOS XOR gate using transmission gates
+* XOR: Y = A'B + AB' = A XOR B
+
+* Power supply
+VDD vdd 0 DC 5
+
+* Input signals (different frequencies to show all combinations)
+* A: period = 20us, B: period = 10us
+VA a 0 PULSE(0 5 0 1n 1n 10u 20u)
+VB b 0 PULSE(0 5 0 1n 1n 5u 10u)
+
+* Generate inverted inputs using inverters
+* Inverter for A
+MP_INVA abar a vdd vdd PMOS W=2u L=0.18u
+MN_INVA abar a 0 0 NMOS W=1u L=0.18u
+
+* Inverter for B
+MP_INVB bbar b vdd vdd PMOS W=2u L=0.18u
+MN_INVB bbar b 0 0 NMOS W=1u L=0.18u
+
+* XOR implementation using transmission gates
+* When A=0: pass B through (controlled by A'=1)
+* When A=1: pass B' through (controlled by A=1)
+
+* Transmission gate 1: passes B when A=0 (A'=1)
+* NMOS controlled by abar, PMOS controlled by a
+MN_TG1 b abar out 0 NMOS W=1u L=0.18u
+MP_TG1 b a out vdd PMOS W=2u L=0.18u
+
+* Transmission gate 2: passes B' when A=1
+* NMOS controlled by a, PMOS controlled by abar
+MN_TG2 bbar a out 0 NMOS W=1u L=0.18u
+MP_TG2 bbar abar out vdd PMOS W=2u L=0.18u
+
+* Load capacitor
+CL out 0 100f
+
+* Transistor models
+.model NMOS NMOS (LEVEL=1 VTO=0.7 KP=110u GAMMA=0.4 PHI=0.65 LAMBDA=0.04)
+.model PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.4 PHI=0.65 LAMBDA=0.05)
+
+* Transient analysis - run long enough to see all input combinations
+.tran 0.1u 40u
+
+.end

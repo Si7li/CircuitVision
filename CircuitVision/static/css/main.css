@@ -1,0 +1,1042 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #00ff7f; /* Spring Green */
+    --primary-text-color: #000000;
+    --secondary-button-bg: #333333;
+    --secondary-button-text: #ffffff;
+    --secondary-button-border: #555555;
+    --secondary-button-hover-bg: #444444;
+    --secondary-button-hover-border: #666666;
+    --app-bg: #121212;
+    --text-color: #e0e0e0;
+    --subtle-border-color: #333333;
+    --input-bg-color: #1e1e1e;
+    --input-border-color: #444444;
+}
+
+body {
+    background-color: var(--app-bg);
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image:
+        linear-gradient(rgba(0, 255, 127, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 127, 0.05) 1px, transparent 1px);
+    background-size: 35px 35px;
+}
+
+/* General Button Styling - Base for Primary and Secondary */
+button[data-testid^="stBaseButton-"] {
+    border-radius: 0;
+    padding: 10px 18px; /* Slightly larger padding for general buttons */
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent; /* Base border */
+    cursor: pointer;
+}
+
+/* Primary Button Styling */
+button[data-testid="stBaseButton-primary"] {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-color);
+}
+
+button[data-testid="stBaseButton-primary"]:hover {
+    background-color: #00cc66; /* Darker shade of primary */
+    border-color: #00cc66;
+    box-shadow: 0 2px 8px rgba(0, 255, 127, 0.2);
+}
+
+button[data-testid="stBaseButton-primary"]:active {
+    background-color: #00994d; /* Even darker */
+    border-color: #00994d;
+    box-shadow: none;
+}
+
+button[data-testid="stBaseButton-primary"]:disabled,
+button[data-testid="stBaseButton-primary"][disabled] {
+    background-color: #00b359; /* Lighter, desaturated blue */
+    border-color: #00b359;
+    color: #a0a0a0; /* Very light text */
+    cursor: not-allowed;
+}
+
+/* Secondary Button Styling (Default Streamlit Button) */
+button[data-testid="stBaseButton-secondary"] {
+    background-color: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+    border: 1px solid var(--secondary-button-border);
+}
+
+button[data-testid="stBaseButton-secondary"]:hover {
+    background-color: var(--secondary-button-hover-bg);
+    border-color: var(--secondary-button-hover-border);
+    color: #ffffff;
+}
+
+button[data-testid="stBaseButton-secondary"]:active {
+    background-color: #555555; /* Darker gray on active/press */
+    border-color: #777777;
+}
+
+button[data-testid="stBaseButton-secondary"]:disabled,
+button[data-testid="stBaseButton-secondary"][disabled] {
+    background-color: #f5f5f5; /* Light gray */
+    border-color: #e0e0e0;
+    color: #aaaaaa; /* Light gray text */
+    cursor: not-allowed;
+}
+
+/* Hide Streamlit header */
+.stAppHeader {
+    display: none !important;
+}
+
+/* Hide Streamlit header decoration */
+.stDecoration {
+    display: none !important;
+}
+
+/* Hide Streamlit toolbar */
+.stToolbar {
+    display: none !important;
+}
+
+/* Reduce space above banner */
+.st-emotion-cache-1w723zb {
+    padding: 1rem 1rem 1rem !important;
+}
+
+/* New styles for the custom component statistics table */
+.component-stats-table table {
+    width: 100%;
+    font-size: 0.9em; /* Slightly smaller font */
+    border-collapse: collapse;
+}
+
+.component-stats-table th, .component-stats-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+
+.component-stats-table th {
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* Style inline code (text between backticks) */
+code {
+    color: #00ff7f !important; /* Spring Green text */
+    background-color: #2e2e2e; /* Dark background */
+    padding: 3px 8px;
+    border-radius: 0;
+    border: 1px solid #444444; /* Soft border */
+    font-family: 'JetBrains Mono', 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.8em;
+    line-height: 1.5;
+    box-shadow: none;
+    transition: none;
+}
+
+/* Style for Streamlit expander (dropdown) - General */
+div[data-testid="stExpander"] {
+    background-color: #1e1e1e;
+    border-radius: 0;
+    margin-bottom: 12px;
+    border: 1px solid var(--subtle-border-color); /* Initially transparent border */
+    overflow: hidden;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+div[data-testid="stExpander"]:hover {
+    border-color: #444444; /* Subtle border on hover */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */ /* Optional: subtle shadow for lift */
+}
+
+/* Style ONLY the header of general expanders */
+div[data-testid="stExpander"] > div[data-testid="stExpanderHeader"] {
+    background-color: transparent; /* Fully transparent header background */
+    color: var(--text-color);
+    padding: 14px 18px; /* Slightly adjusted padding */
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+div[data-testid="stExpander"] > div[data-testid="stExpanderHeader"]:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Very subtle tint on hover */
+}
+
+div[data-testid="stExpander"][aria-expanded="true"] > div[data-testid="stExpanderHeader"] {
+    border-bottom: 1px solid var(--subtle-border-color); /* Border when expanded */
+}
+
+/* Styling for the content area within the expander */
+div[data-testid="stExpanderDetails"] {
+    padding: 18px; /* Padding for the content */
+    background-color: #1e1e1e; /* Ensure content area bg is also transparent or app-bg */
+}
+
+/* Remove default Streamlit border from the header as we manage it - this might be less critical now but safe to keep */
+div[data-testid="stExpander"] > div[data-testid="stExpanderHeader"]:first-child {
+    border-bottom: none;
+}
+/* Re-ensure border only shows when expanded, overriding the above if necessary */
+div[data-testid="stExpander"][aria-expanded="true"] > div[data-testid="stExpanderHeader"]:first-child {
+    border-bottom: 1px solid var(--subtle-border-color);
+}
+
+/* Detailed Timings Expander - Custom Styling */
+.detailed-timings-expander div[data-testid="stExpander"] {
+    background-color: #1a2b22; /* Light green background for content area */
+    border: 1px solid #004d1a; /* Greenish border - keep distinct */
+    border-radius: 0; /* Consistent border-radius */
+}
+
+.detailed-timings-expander div[data-testid="stExpander"]:hover {
+    border-color: #006622; /* Slightly darker green border on hover */
+    /* box-shadow: 0 2px 8px rgba(163, 217, 177, 0.3); */ /* Optional: green-tinted shadow */
+}
+
+.detailed-timings-expander div[data-testid="stExpander"] > div[data-testid="stExpanderHeader"] {
+    background-color: #223c2d; /* Slightly darker green for the header */
+    color: #99ffc2; /* Dark green text for contrast */
+    /* padding will be inherited or can be set specifically if needed */
+}
+
+.detailed-timings-expander div[data-testid="stExpander"] > div[data-testid="stExpanderHeader"]:hover {
+    background-color: #2a4b37; /* Lighter green tint on hover for header */
+}
+
+.detailed-timings-expander div[data-testid="stExpander"][aria-expanded="true"] > div[data-testid="stExpanderHeader"] {
+    border-bottom: 1px solid #004d1a; /* Greenish border when expanded */
+}
+
+.detailed-timings-expander div[data-testid="stExpanderDetails"] {
+    padding: 18px; /* Consistent padding */
+    background-color: #1a2b22; /* Ensure content area matches expander bg */
+}
+
+/* New styles for the pop-up loader */
+.loader-popup-overlay {
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything */
+}
+
+.loader-popup-content {
+    background-color: #1e1e1e; /* White background for the pop-up box */
+    padding: 40px; /* Increased padding */
+    border-radius: 0; /* Slightly more rounded corners */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px; /* Minimum width for the popup box */
+    border: 1px solid var(--subtle-border-color);
+}
+
+.loader-popup-text {
+    margin: 0; /* Reset margin */
+}
+
+/* Custom Loader CSS */
+.loader {
+    position: relative;
+    width: 120px;
+    height: 140px;
+    background-image: radial-gradient(circle 30px, #cccccc 100%, transparent 0),
+    radial-gradient(circle 5px, #cccccc 100%, transparent 0),
+    radial-gradient(circle 5px, #cccccc 100%, transparent 0),
+    linear-gradient(#cccccc 20px, transparent 0);
+    background-position: center 127px , 94px 102px , 16px 18px, center 114px;
+    background-size: 60px 60px, 10px 10px , 10px 10px , 4px 14px;
+    background-repeat: no-repeat;
+    perspective: 500px;
+}
+  .loader::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius:50%;
+    border: 3px solid #cccccc; /* Changed from #fff */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -55%) rotate(-45deg);
+    border-right-color: transparent;
+    box-sizing: border-box;
+}
+  .loader::after {
+    content: '';
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    transform: translate(-50%, -55%) rotate(-45deg) rotateY(0deg) ;
+    left: 50%;
+    top: 50%;
+    box-sizing: border-box;
+    border: 7px solid var(--primary-color);
+    border-radius:50%;
+    animation: rotate 0.5s linear infinite;
+  }
+
+@keyframes rotate {
+  to{transform: translate(-50%, -55%) rotate(-45deg) rotateY(360deg)   }
+}
+
+/* Custom Gemini Loader CSS */
+.gemini-loader {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z' fill='url(%23prefix__paint0_radial_980_20147)'/%3E%3Cdefs%3E%3CradialGradient id='prefix__paint0_radial_980_20147' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)'%3E%3Cstop offset='.067' stop-color='%239168C0'/%3E%3Cstop offset='.343' stop-color='%235684D1'/%3E%3Cstop offset='.672' stop-color='%231BA1E3'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px 32px;
+    animation: rotate-gemini 1.5s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes rotate-gemini {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Styles for the initial model loader */
+.initial-loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem; /* Add some padding around */
+    width: 100%; /* Occupy full width to center content properly */
+    box-sizing: border-box;
+}
+
+.initial-loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; /* Reduced gap slightly */
+    padding: 1.5rem; /* Adjusted padding */
+    background-color: var(--app-bg); 
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: var(--text-color);
+    border: 1px solid var(--subtle-border-color);
+}
+
+.initial-loader-content p {
+    font-size: 1.0em; /* Slightly smaller font for a more subtle look */
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Ensuring the gemini-loader within this context has a decent size */
+.initial-loader-content .gemini-loader {
+    width: 38px; 
+    height: 38px;
+}
+
+/* New Circuit Model Loader */
+.circuit-model-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px; /* Container for the bars */
+    height: 40px; /* Height of the bars */
+}
+
+.circuit-model-loader > div {
+    width: 8px; /* Width of each bar */
+    height: 100%;
+    margin: 0 3px; /* Spacing between bars */
+    background-color: var(--primary-color); /* Use your app's primary color */
+    border-radius: 0;
+    animation: pulse-bars 1.2s infinite ease-in-out;
+}
+
+/* Animation delay for each bar */
+.circuit-model-loader > div:nth-child(1) {
+    animation-delay: -0.30s;
+}
+
+.circuit-model-loader > div:nth-child(2) {
+    animation-delay: -0.15s;
+}
+
+.circuit-model-loader > div:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes pulse-bars {
+    0%, 80%, 100% {
+        transform: scaleY(0.4);
+        opacity: 0.7;
+    }
+    40% {
+        transform: scaleY(1.0);
+        opacity: 1;
+    }
+}
+
+/* Make sure sidebar buttons are always visible */
+div[data-testid="stSidebarCollapseButton"],
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"]),
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"]) {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Custom sidebar toggle buttons with minimalist design */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"]),
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"]) {
+    position: relative;
+    background-color: #222222;
+    border-radius: 0;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444444;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Hide the original SVG icons */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"]) svg,
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"]) svg {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Minimalist expand icon (hamburger menu) */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"])::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'%3E%3C/line%3E%3Cline x1='4' y1='6' x2='20' y2='6'%3E%3C/line%3E%3Cline x1='4' y1='18' x2='20' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Minimalist collapse icon (X/close) */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"])::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Subtle hover effects */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"]):hover,
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"]):hover {
+    background-color: #333333;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Subtle active/pressed state */
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M10 6L"]):active,
+button[data-testid="stBaseButton-headerNoPadding"]:has(svg path[d^="M15.41 7.41L"]):active {
+    background-color: #444444;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* Custom File Uploader Styles (/Next.js Inspired) */
+section[data-testid="stFileUploaderDropzone"] {
+    display: flex; /* Arrange instructions and button in a row */
+    flex-direction: row;
+    align-items: center; /* Vertically center items in the row */
+    justify-content: space-between; /* Push instructions and button apart */
+    border: 2px dashed #444444; /* Light dashed border */
+    border-radius: 0;
+    padding: 20px; /* Adjusted padding */
+    background-color: #1e1e1e; /* Very light gray background */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+section[data-testid="stFileUploaderDropzone"]:hover {
+    background-color: #2a2a2a; /* Slightly darker on hover */
+    border-color: #666666; /* Darker border on hover */
+}
+
+/* Hide default Streamlit icon if a new one is preferred or for cleaner look */
+section[data-testid="stFileUploaderDropzone"] .st-emotion-cache-nwtri {
+    /* display: none; */ /* Uncomment if you want to hide the default cloud icon */
+    margin-bottom: 12px; /* Space below icon */
+}
+
+section[data-testid="stFileUploaderDropzone"] .st-emotion-cache-nwtri svg {
+    fill: #cccccc; /* Darker gray for the icon */
+    width: 48px; /* Adjust icon size */
+    height: 48px;
+}
+
+/* Styling for the "Drag and drop file here" text */
+section[data-testid="stFileUploaderDropzone"] .st-emotion-cache-9ycgxx {
+    font-size: 1.1em; /* Larger text */
+    color: #e0e0e0; /* Darker text color */
+    font-weight: 500; /* Slightly bolder */
+    display: block; /* Ensure it takes full width for centering */
+    margin-bottom: 6px;
+}
+
+/* Styling for the "Limit 200MB per file..." text */
+section[data-testid="stFileUploaderDropzone"] .st-emotion-cache-1rpn56r {
+    font-size: 0.85em; /* Smaller text */
+    color: #aaaaaa; /* Lighter gray for subtext */
+}
+
+/* Styling for the "Browse files" button */
+section[data-testid="stFileUploaderDropzone"] button[data-testid="stBaseButton-secondary"] {
+    background-color: #333333; /* White background */
+    color: #ffffff; /* Dark text */
+    border: 1px solid #555555; /* Light gray border */
+    border-radius: 0;
+    padding: 8px 18px; /* Adjust padding */
+    font-weight: 500;
+    margin-top: 0; /* Remove top margin as it's now side-by-side */
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+section[data-testid="stFileUploaderDropzone"] button[data-testid="stBaseButton-secondary"]:hover {
+    background-color: #444444; /* Light gray on hover */
+    border-color: #777777;
+    color: #ffffff;
+}
+
+section[data-testid="stFileUploaderDropzone"] button[data-testid="stBaseButton-secondary"]:active {
+    background-color: #555555; /* Darker gray on active/press */
+    border-color: #888888;
+}
+
+/* Make the instructions container flex for better alignment */
+section[data-testid="stFileUploaderDropzone"] > div[data-testid="stFileUploaderDropzoneInstructions"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align icon/text to the left */
+    justify-content: center;
+    flex-grow: 1; /* Allow instructions to take available space */
+    margin-right: 15px; /* Add some space between instructions and button */
+}
+
+/* Styles for the uploaded file item (pill) */
+div[data-testid="stFileUploaderFile"] {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 0; /* Consistent with dropzone */
+    background-color: #2a2a2a; /* Consistent light background */
+    margin-top: 12px; /* Space above the pill */
+    border: 1px solid #444444; /* Consistent border */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04); /* Subtle shadow */
+}
+
+/* Icon within the file pill */
+div[data-testid="stFileUploaderFile"] > div:first-child svg { /* Targets the icon container's SVG */
+    fill: #cccccc; /* Same as dropzone icon color */
+    width: 20px;
+    height: 20px;
+}
+
+/* Container for filename and size */
+div[data-testid="stFileUploaderFile"] .stFileUploaderFileData {
+    display: flex; /* Key for one-line display of children */
+    align-items: baseline; /* Align text baselines */
+    flex-grow: 1; /* Take available space */
+    margin-left: 10px; /* Space between icon and text block */
+    margin-right: 10px; /* Space between text block and delete button */
+    overflow: hidden; /* Prevent text overflow issues */
+}
+
+/* Filename style */
+div[data-testid="stFileUploaderFileName"] {
+    font-weight: 500; /* Medium weight for filename */
+    color: #e0e0e0; /* Darker text */
+    white-space: nowrap; /* Prevent filename from wrapping */
+    overflow: hidden; /* Hide overflow if too long */
+    text-overflow: ellipsis; /* Show ... for long filenames */
+    margin-right: 8px; /* Space between filename and size */
+    font-size: 0.95em;
+}
+
+/* File size style */
+div[data-testid="stFileUploaderFile"] .stFileUploaderFileData > small {
+    font-size: 0.8em; /* Slightly smaller size text */
+    color: #aaaaaa; /* Lighter gray for size */
+    white-space: nowrap; /* Prevent size from wrapping */
+    flex-shrink: 0; /* Prevent size from shrinking if filename is very long */
+}
+
+/* Delete button in the file pill */
+div[data-testid="stFileUploaderDeleteBtn"] button[data-testid="stBaseButton-minimal"] {
+    padding: 4px;
+    border-radius: 50%; /* Make it circular for a cleaner look */
+    transition: background-color 0.2s ease;
+}
+
+div[data-testid="stFileUploaderDeleteBtn"] button[data-testid="stBaseButton-minimal"]:hover {
+    background-color: #444444; /* Hover effect for delete button */
+}
+
+div[data-testid="stFileUploaderDeleteBtn"] button[data-testid="stBaseButton-minimal"] svg {
+    fill: #cccccc; /* Icon color */
+    width: 16px; /* Adjust size */
+    height: 16px;
+}
+
+/* Container for system badges */
+.system-badges-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: -15px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+
+/* Badge for CPU info */
+.cpu-info-badge {
+    background-color: #2a1a1a; /* Light red background similar to model badge style */
+    color: #ff8a8a; /* Dark red text for contrast */
+    padding: 5px 12px;
+    border-radius: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #7c2d2d; /* Soft red border */
+    display: flex;
+    align-items: center;
+}
+
+.blinking-light {
+    width: 8px;
+    height: 8px;
+    background-color: #dc2626; /* Red indicator light */
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+/* Model status badge */
+.model-status-badge {
+    background-color: #f0f4f8;
+    color: #1f2937;
+    padding: 5px 12px;
+    border-radius: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #d0d7de;
+    display: flex;
+    align-items: center;
+}
+
+.model-status-badge.success {
+    background-color: #1a2b22;
+    color: #99ffc2;
+    border-color: #004d1a;
+}
+
+.model-status-badge.warning {
+    background-color: #3b2e00;
+    color: #ffd6a5;
+    border-color: #856404;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-indicator.success {
+    background-color: #99ffc2;
+}
+
+.status-indicator.warning {
+    background-color: #ffd6a5;
+}
+
+/* === Footer Redesign === */
+.custom-footer::before, .custom-footer::after {
+    content: none !important;
+}
+
+@keyframes footer-gradient-move {
+    0%   { background-position: 0 0; }
+    100% { background-position: 400% 0; }
+}
+
+.custom-footer {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    border-radius: 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--app-bg, #121212), var(--app-bg, #121212)),
+        linear-gradient(90deg,
+            #00ff7f,
+            #00c853,
+            #3f51b5,
+            #d500f9,
+            #ff0066,
+            #00ff7f
+        );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 400% 100%;
+    animation: footer-gradient-move 8s linear infinite;
+}
+
+.custom-footer-hr {
+    display: none;
+}
+
+.custom-footer-h3 {
+    margin: 0 0 1rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: -0.02em;
+}
+
+.footer-links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 10px 18px;
+    border-radius: 0;
+    background-color: var(--secondary-button-bg);
+    border: 1px solid var(--secondary-button-border);
+    color: #cccccc;
+    text-decoration: none !important;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.footer-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.07);
+    color: var(--primary-color);
+}
+
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    fill: #cccccc;
+    transition: fill 0.2s ease;
+}
+
+.footer-link:hover .footer-icon {
+    fill: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .custom-footer {
+        padding: 2rem 1rem;
+        margin-bottom: 4rem; /* Increased space below footer on mobile */
+    }
+    
+    .custom-footer-h3 {
+        font-size: 1.5rem;
+    }
+
+    .footer-links-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer-link {
+        width: 100%;
+        justify-content: center;
+        max-width: 320px;
+    }
+    
+    .logo-container .main-logo {
+        max-width: 120px; /* Adjust logo size on mobile */
+    }
+
+    /* Make the main tab component the positioning context for the fade effect */
+    div[data-testid="stTabs"] {
+        position: relative;
+    }
+
+    /* The direct child container that holds the tabs needs to scroll */
+    div[data-testid="stTabs"] > div[role="tablist"] {
+        overflow-x: auto;
+        -ms-overflow-style: none;  /* Hide scrollbar on IE and Edge */
+        scrollbar-width: none;  /* Hide scrollbar on Firefox */
+    }
+
+    /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+    div[data-testid="stTabs"] > div[role="tablist"]::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Create the fade effect on the main non-scrolling parent */
+    div[data-testid="stTabs"]::after {
+        content: none;
+    }
+
+    /* Prevent individual tabs from shrinking, forcing them to overflow */
+    div[data-testid="stTabs"] button[data-baseweb="tab"] {
+        flex-shrink: 0;
+    }
+    
+    .loader-popup-content {
+        width: 85vw;
+        min-width: 0;
+        padding: 30px 20px;
+    }
+    
+    .loader-popup-text {
+        font-size: 1em !important; /* Override inline style */
+    }
+}
+
+/* === Custom Tab Styles === */
+
+/* The tab bar container */
+div[data-testid="stTabs"] > div[role="tablist"] {
+    border-bottom: none; /* remove the underline from the container */
+    gap: 8px; /* use flex gap for spacing */
+    margin-bottom: 24px;
+}
+
+/* Individual tab buttons */
+div[data-testid="stTabs"] button[data-baseweb="tab"] {
+    background-color: var(--secondary-button-bg);
+    border: 1px solid var(--secondary-button-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0; /* Sharp corners */
+}
+
+/* Remove left padding from the very first tab */
+div[data-testid="stTabs"] button[data-baseweb="tab"]:first-child {
+    margin-left: 0;
+}
+
+/* Hover effect for inactive tabs */
+div[data-testid="stTabs"] button[data-baseweb="tab"]:hover:not([aria-selected="true"]) {
+    background-color: var(--secondary-button-hover-bg);
+    border-color: var(--secondary-button-hover-border);
+    color: #fff;
+}
+
+/* Style for the currently selected tab */
+div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"] {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* === Responsive Tab Styles for Mobile === */
+/* Consolidated into main mobile media query at end of file */
+
+/* New Custom Loader for Analysis Popup */
+.analysis-loader {
+    position: relative;
+    width: 75px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(var(--secondary-button-border) 50px, transparent 0),
+                      linear-gradient(var(--secondary-button-border) 50px, transparent 0),
+                      linear-gradient(var(--secondary-button-border) 50px, transparent 0),
+                      linear-gradient(var(--secondary-button-border) 50px, transparent 0),
+                      linear-gradient(var(--secondary-button-border) 50px, transparent 0);
+    background-size: 8px 100%;
+    background-position: 0px 90px, 15px 78px, 30px 66px, 45px 58px, 60px 50px;
+    animation: pillerPushUp 4s linear infinite;
+}
+
+.analysis-loader:after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: ballStepUp 4s linear infinite;
+}
+
+@keyframes pillerPushUp {
+  0% , 40% , 100%{background-position: 0px 90px, 15px 78px, 30px 66px, 45px 58px, 60px 50px}
+  50% ,  90% {background-position: 0px 50px, 15px 58px, 30px 66px, 45px 78px, 60px 90px}
+}
+
+@keyframes ballStepUp {
+  0% {transform: translate(0, 0)}
+  5% {transform: translate(8px, -14px)}
+  10% {transform: translate(15px, -10px)}
+  17% {transform: translate(23px, -24px)}
+  20% {transform: translate(30px, -20px)}
+  27% {transform: translate(38px, -34px)}
+  30% {transform: translate(45px, -30px)}
+  37% {transform: translate(53px, -44px)}
+  40% {transform: translate(60px, -40px)}
+  50% {transform: translate(60px, 0)}
+  57% {transform: translate(53px, -14px)}
+  60% {transform: translate(45px, -10px)}
+  67% {transform: translate(37px, -24px)}
+  70% {transform: translate(30px, -20px)}
+  77% {transform: translate(22px, -34px)}
+  80% {transform: translate(15px, -30px)}
+  87% {transform: translate(7px, -44px)}
+  90% {transform: translate(0, -40px)}
+  100% {transform: translate(0, 0);}
+}
+
+/* Custom styles for the help icon tooltip - V2 */
+@keyframes pulse-help {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 127, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 127, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 127, 0);
+  }
+}
+
+div[data-testid="stTooltipIcon"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;  /* Set a fixed size */
+    height: 24px;
+    border-radius: 50%; /* Make it circular */
+    border: 1px solid var(--primary-color);
+    animation: pulse-help 2s infinite;
+    transition: background-color 0.2s ease;
+    background-color: transparent;
+    position: relative; /* Needed for the pseudo-element */
+}
+
+div[data-testid="stTooltipIcon"]:hover {
+    background-color: rgba(0, 255, 127, 0.15); /* Subtle green glow on hover */
+    animation: none; /* Pause animation on hover */
+}
+
+/* Hide the default Streamlit SVG icon by making it invisible but still interactive */
+div[data-testid="stTooltipIcon"] svg {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Create a custom icon using a pseudo-element */
+div[data-testid="stTooltipIcon"]::before {
+    content: '?';
+    font-family: 'Inter', sans-serif; /* Use a clean, modern font */
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary-color);
+    line-height: 24px; /* Center it vertically */
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Allow hover events to pass through to the underlying div */
+}
+
+/* Custom Tooltip Content Styling */
+div[data-testid="stTooltipContent"] {
+    background-color: #2e2e2e !important;
+    color: var(--text-color) !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--primary-color) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.9em !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    padding: 10px 14px !important;
+}
+
+/* Logo Styling */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure container takes height for alignment */
+}
+
+.main-logo {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,26 @@
+CMOS Inverter
+* Simple CMOS inverter circuit with NMOS and PMOS transistors
+
+* Power supply
+VDD vdd 0 DC 5
+
+* Input signal: pulse from 0V to 5V
+VIN in 0 PULSE(0 5 0 1n 1n 5u 10u)
+
+* PMOS transistor (source to VDD, drain to output)
+MP1 out in vdd vdd PMOS W=2u L=0.18u
+
+* NMOS transistor (source to GND, drain to output)
+MN1 out in 0 0 NMOS W=1u L=0.18u
+
+* Load capacitor
+CL out 0 100f
+
+* Transistor models
+.model NMOS NMOS (LEVEL=1 VTO=0.7 KP=110u GAMMA=0.4 PHI=0.65 LAMBDA=0.04)
+.model PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.4 PHI=0.65 LAMBDA=0.05)
+
+* Transient analysis
+.tran 0.1u 50u
+
+.end

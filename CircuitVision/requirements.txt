@@ -1,0 +1,17 @@
+streamlit
+numpy
+opencv-python
+Pillow
+PySpice
+google-genai
+ultralytics
+torch
+torchvision
+python-dotenv
+scikit-learn
+git+https://github.com/facebookresearch/sam2.git
+peft
+requests
+gdown
+openai
+groq

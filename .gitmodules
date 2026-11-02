@@ -1,6 +1,0 @@
-[submodule "CircuitVision"]
-	path = CircuitVision
-	url = https://github.com/JKc66/CircuitVision.git
-[submodule "netlist_simulator"]
-	path = netlist_simulator
-	url = https://github.com/Si7li/netlist-simulator.git

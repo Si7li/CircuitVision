@@ -1,0 +1,20 @@
+RLC Series Resonant Circuit
+* Classic RLC circuit demonstrating resonance
+* Resonant frequency: f0 = 1/(2*pi*sqrt(LC)) ≈ 1.59 kHz
+* Q factor: Q = (1/R)*sqrt(L/C) ≈ 10
+
+* Input voltage source: 5V peak pulse
+VIN in 0 DC 0 SIN(0 5 1.59k)
+
+* Series RLC components
+R1 in n1 10
+L1 n1 n2 10m
+C1 n2 0 1u
+
+* Output measurement point
+* Voltage across capacitor shows resonance behavior
+
+* Transient analysis - long enough to see damped oscillations
+.tran 0.01m 20m
+
+.end

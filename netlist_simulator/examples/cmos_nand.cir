@@ -1,0 +1,29 @@
+CMOS NAND Gate
+* 2-input CMOS NAND gate
+
+* Power supply
+VDD vdd 0 DC 5
+
+* Input signals (two different frequencies to show all input combinations)
+VA a 0 PULSE(0 5 0 1n 1n 10u 20u)
+VB b 0 PULSE(0 5 0 1n 1n 5u 10u)
+
+* PMOS pull-up network (parallel)
+MP1 out a vdd vdd PMOS W=2u L=0.18u
+MP2 out b vdd vdd PMOS W=2u L=0.18u
+
+* NMOS pull-down network (series)
+MN1 out a n1 0 NMOS W=2u L=0.18u
+MN2 n1 b 0 0 NMOS W=2u L=0.18u
+
+* Load capacitor
+CL out 0 100f
+
+* Transistor models
+.model NMOS NMOS (LEVEL=1 VTO=0.7 KP=110u GAMMA=0.4 PHI=0.65 LAMBDA=0.04)
+.model PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.4 PHI=0.65 LAMBDA=0.05)
+
+* Transient analysis
+.tran 0.1u 40u
+
+.end

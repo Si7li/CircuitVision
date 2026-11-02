@@ -1,0 +1,21 @@
+
+static/uploads
+
+.env 
+
+# models:
+*.pth
+*.pt
+
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+
+*__pycache__/*
+progress.md
+combined_output.md
+models/configs/sam2.1_hiera_l.yaml

@@ -1,0 +1,14 @@
+* Circuit Description
+* Current Source
+I1 2 3 DC 1A
+
+* Voltage Probe
+V1 2 3 DC 0V
+
+* Analysis
+.OP
+
+* Output
+.PRINT DC I1 V(2) V(3)
+.PROBE
+.END

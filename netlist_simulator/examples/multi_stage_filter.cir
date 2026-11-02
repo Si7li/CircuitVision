@@ -1,0 +1,27 @@
+Multi-Stage RC Filter
+* Cascaded RC low-pass filter stages
+* Each stage provides additional filtering
+* Good for demonstrating multiple node plotting
+
+* Input voltage source: 5V peak, 1kHz sine wave
+VIN in 0 DC 0 SIN(0 5 1k)
+
+* Stage 1
+R1 in n1 1k
+C1 n1 0 1u
+
+* Stage 2
+R2 n1 n2 2k
+C2 n2 0 2.2u
+
+* Stage 3
+R3 n2 out 500
+C3 out 0 4.7u
+
+* Load resistor
+RL out 0 10k
+
+* Simulation: transient analysis
+.tran 0.01m 10m
+
+.end

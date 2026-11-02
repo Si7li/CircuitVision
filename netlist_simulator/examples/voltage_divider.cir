@@ -1,0 +1,16 @@
+Voltage Divider Circuit
+* Basic resistor voltage divider
+* Input: 10V DC with small AC signal
+* Output should be approximately 3.33V (1k / 3k of 10V)
+
+* Input voltage source
+VIN in 0 DC 10 AC 1 SIN(10 1 100)
+
+* Voltage divider resistors
+R1 in out 2k
+R2 out 0 1k
+
+* Transient analysis
+.tran 0.1m 50m
+
+.end

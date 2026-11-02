@@ -18,9 +18,9 @@ flowchart LR
 ```
 
 1. **Capture.** Take a photo or pick one from the gallery. The app uploads it and polls the job until it finishes.
-2. **Image to netlist.** [CircuitVision](https://github.com/JKc66/CircuitVision) detects the components with a fine-tuned YOLOv11, segments the wires with SAM 2 to work out the nodes, and uses Gemini to read labels and values.
+2. **Image to netlist.** The CircuitVision pipeline in [`CircuitVision/`](CircuitVision/) detects the components with a fine-tuned YOLOv11, segments the wires with SAM 2 to work out the nodes, and uses Gemini to read labels and values.
 3. **Normalize.** `netlist_normalizer.py` turns CircuitVision's component list into a netlist ngspice accepts: it checks every component line and the ground reference, and adds the title, a default `.tran` analysis and `.end` when they're missing.
-4. **Simulate.** [`netlist_simulator`](https://github.com/Si7li/netlist-simulator) runs ngspice and plots node voltages and branch currents.
+4. **Simulate.** [`netlist_simulator/`](netlist_simulator/) runs ngspice and plots node voltages and branch currents.
 5. **Results.** The app shows the netlist (with a copy button) and the plots.
 
 ## Repository layout
@@ -33,15 +33,15 @@ backend/            RunPod serverless worker
   src/netlist_normalizer.py
   tests/              21 unit tests for the normalizer
   Dockerfile*         Full, fast and slim images
-CircuitVision/      Submodule: image-to-netlist models and pipeline
-netlist_simulator/  Submodule: PySpice/ngspice simulation and plotting
+CircuitVision/      Image-to-netlist models and pipeline, with its Streamlit web app
+netlist_simulator/  PySpice/ngspice simulation and plotting
 .github/workflows/  Builds the worker image and pushes it to Docker Hub on every change
 ```
 
 ## Run it
 
 ```bash
-git clone --recurse-submodules https://github.com/Si7li/CircuitVision.git
+git clone https://github.com/Si7li/CircuitVision.git
 cd CircuitVision
 ```
 
@@ -86,9 +86,9 @@ Passing the RunPod key with `--dart-define` is fine for testing. In a published 
 
 ## Credits
 
-- [CircuitVision](https://github.com/JKc66/CircuitVision) (Apache-2.0) provides the image-to-netlist models and pipeline, included here as a submodule.
+- The image-to-netlist app in [`CircuitVision/`](CircuitVision/) was first published at [JKc66/CircuitVision](https://github.com/JKc66/CircuitVision) under the Apache-2.0 license, kept in [`CircuitVision/LICENSE`](CircuitVision/LICENSE); its README lists its contributors.
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics), [SAM 2](https://github.com/facebookresearch/sam2) by Meta, [Google Gemini](https://ai.google.dev/), [ngspice](https://ngspice.sourceforge.io/), [PySpice](https://github.com/PySpice-org/PySpice), [RunPod](https://www.runpod.io/).
 
 ## License
 
-The code in this repository (the Flutter app, the backend and the workflow) is MIT licensed, see [LICENSE](LICENSE). The submodules keep their own licenses.
+The Flutter app, the backend, the simulator and the workflow are MIT licensed, see [LICENSE](LICENSE). [`CircuitVision/`](CircuitVision/) is Apache-2.0, see [`CircuitVision/LICENSE`](CircuitVision/LICENSE).
