@@ -86,7 +86,6 @@ Passing the RunPod key with `--dart-define` is fine for testing. In a published 
 
 ## Credits
 
-- The image-to-netlist app in [`CircuitVision/`](CircuitVision/) was first published at [JKc66/CircuitVision](https://github.com/JKc66/CircuitVision) under the Apache-2.0 license, kept in [`CircuitVision/LICENSE`](CircuitVision/LICENSE); its README lists its contributors.
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics), [SAM 2](https://github.com/facebookresearch/sam2) by Meta, [Google Gemini](https://ai.google.dev/), [ngspice](https://ngspice.sourceforge.io/), [PySpice](https://github.com/PySpice-org/PySpice), [RunPod](https://www.runpod.io/).
 
 ## License
