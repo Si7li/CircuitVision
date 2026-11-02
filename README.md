@@ -87,7 +87,3 @@ Passing the RunPod key with `--dart-define` is fine for testing. In a published 
 ## Credits
 
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics), [SAM 2](https://github.com/facebookresearch/sam2) by Meta, [Google Gemini](https://ai.google.dev/), [ngspice](https://ngspice.sourceforge.io/), [PySpice](https://github.com/PySpice-org/PySpice), [RunPod](https://www.runpod.io/).
-
-## License
-
-The Flutter app, the backend, the simulator and the workflow are MIT licensed, see [LICENSE](LICENSE). [`CircuitVision/`](CircuitVision/) is Apache-2.0, see [`CircuitVision/LICENSE`](CircuitVision/LICENSE).
